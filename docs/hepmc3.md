@@ -1,5 +1,5 @@
 # Generating our own EIC events via Pythia8
-As is specified in the [ddsim documentation](TODO), we can use centrally generated Pythia events instead of generating them ourselves.
+As is specified in the [ddsim documentation](ddsim.md), we can use centrally generated Pythia events instead of generating them ourselves.
 If you'd rather generate them yourself, this is the tutorial for you.
 
 To generate events with Pythia8, we have to pay attention to the reference frame.
