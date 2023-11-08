@@ -19,3 +19,11 @@ The current workflow in EIC software is shown in the following figure.
                                                                      \  EIC Singularity container |
                                                                       \___________________________|
 ```
+
+## Relevant links
+* [singularity](docs/singularity.md): Container program designed for HEP analysis, similar to docker.
+* [hepmc3](TODO):                     Physics events generation.
+* [dd4hep](TODO):                     EIC geometry definition.
+* [ddsim & npsim](TODO):              Geant4 event simulation.
+* [eicrecon](TODO):                   EIC event reconstruction.
+* podio file format:                  TODO.
