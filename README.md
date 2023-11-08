@@ -1,5 +1,5 @@
 # EIC dRICH Helpers
-This repository is just a small collection of markdown files that attempt to summarize the provided EIC tutorials with a focus on dRICH software development.
+This repository is just a small collection of markdown files that attempt to summarize the provided [EIC tutorials](https://github.com/eic/drich-dev/blob/main/doc/tutorials/README.md) with a focus on dRICH software development.
 The current workflow in EIC software is shown in the following figure.
 ```
 +-------------------------------------------------------------------------------------------------+
@@ -25,7 +25,7 @@ The current workflow in EIC software is shown in the following figure.
 * [hepmc3](docs/hepmc3.md):           Physics event generation.
 * [dd4hep](docs/dd4hep.md):           EIC geometry definition.
 * [ddsim & npsim](docs/ddsim.md):     Geant4 event simulation.
-* [eicrecon](TODO):                   EIC event reconstruction.
+* [eicrecon](docs/eicrecon.md):       EIC event reconstruction.
 * podio file format:                  TODO.
 
 ## Important notes
