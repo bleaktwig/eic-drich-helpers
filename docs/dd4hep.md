@@ -1,4 +1,5 @@
 # Geometry development with DD4hep
+*DD4hep: Detector Description for High Energy Physics*.
 ## Definition
 After loading the `eic-shell`, we can load the `epic-nightly` build using
 ```bash
