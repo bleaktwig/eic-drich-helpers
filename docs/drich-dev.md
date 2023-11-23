@@ -1,21 +1,33 @@
 # dRICH development
-To get a good idea of what version of each EIC software we're using, run the `check_branches.sh` script. Then, to build the `drich-dev` repository, we set the environment variables via
+Before getting started with dRICH, you need to clone and build all repositories that you intend to modify. If you don't, the dRICH software will run with what is installed in the `eic-shell` environment. To do this, first source the environment variable,
 ```bash
 source environ.sh
 ```
-and build each repository using the convenient `build.sh` script
+then clone and build the repositories (with HTTPS if you're not a member of the EICUG)
 ```bash
+git clone git@github.com:eic/epic.git
 ./build.sh epic
+
+git clone git@github.com:eic/irt.git
 ./build.sh irt
+
+git clone git@github.com:eic/EDM4eic.git
 ./build.sh EDM4eic
-./build.sh EICrecon # NOTE. Not compiling for me -- seems to be an issue w/ EDM4eic.
-./build.sh juggler  # NOTE. Same as EICrecon.
+
+# NOTE. The build.sh script fails to build EICrecon, so we have to do it by hand.
+#       If I ever figure out what's up I'll try to fix it, but I'm not a CMake
+#       expert so that's probably not gonna happen soon.
+git clone git@github.com:eic/EICrecon.git
+cmake -S EICrecon -B EICrecon/build -DCMAKE_BUILD_TYPE=Debug -DCMAKE_FIND_DEBUG_MODE=OFF -DEICRECON_VERBOSE_CMAKE=ON -DCMAKE_INSTALL_PREFIX=/home/twig/code/eic/drich-dev/prefix
+cmake --build EICrecon/build -j8
+cmake --install EICrecon/build
+
+git clone https://eicweb.phy.anl.gov/EIC/benchmarks/reconstruction_benchmarks.git
 ./build.sh reconstruction_benchmarks
 ```
+To get a good idea of what version of each EIC software we're using, run the `check_branches.sh` script.
 
-Note that the order in which we build is important. If we need to build everything, we can run the convenient `rebuild_all.sh` script (with the `clean` option if we want to build from scratch).
-
-After this, we can build the local `drich-dev` by running `make`.
+After this, we can build the local `drich-dev` by running `make` on the mother directory.
 
 ## Geometry
 We can look at the dRICH geometry by running
