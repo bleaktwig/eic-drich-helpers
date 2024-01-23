@@ -29,4 +29,4 @@ The current workflow in EIC software is shown in the following figure.
 * podio file format:                  TODO.
 
 ## Important notes
-* The agreed-on EIC coordinate system is such that z points in the direction of the hadron beam, y points to the sky, and x points to the ring center.
+* The agreed-on EIC coordinate system is such that z points in the direction of the hadron beam, y points to the sky, and x points to the ring accelerator center.

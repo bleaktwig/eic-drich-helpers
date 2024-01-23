@@ -53,7 +53,7 @@ static constexpr double radian           = 1.;
 static constexpr double steradian        = 1.;
 ```
 
-After changing any geometry constant, it's a good idea to run an overlap check. This is done automatically as a CI job for every commit associated with a pull request, but it can be done by hand (very computationally intensive) by running `overlap_check.sh`.
+After changing any geometry constant, it's a good idea to run an overlap check. This is done automatically as a CI job for every commit associated with a pull request, but it can be done locally (very computationally intensive) by running `overlap_check.sh`.
 
 **NOTE.** There's more details into visualization, CI, and geometry [here](https://github.com/eic/drich-dev/blob/main/doc/tutorials/2-geometry-code.md).
 
@@ -84,7 +84,7 @@ DRICHHits
  |   +- z
  +- size
 ```
-Out of these, what we probably care the most about is `position.x`, `position.y`, and `EDep`. We can see the hit distribution accross events on a colz plot by running
+Out of these, what we probably care the most about is `position.x`, `position.y`, and `EDep`. We can see the hit distribution across events on a colz plot by running
 ```C++
 events->Draw("DRICHHits.position.y:DRICHHits.position.x>>hist(1000,-2000,2000, 1000,-2000,2000)", "DRICHHits.EDep", "COLZ");
 ```
@@ -97,3 +97,24 @@ To what each option means, please see the usage by running the script with no in
 ```bash
 event_display d s out/sim.edm4hep.root i 6
 ```
+
+## Running reconstruction
+Instead of having separate software for each detector, EIC software is organized in an attempt to maximize modularity. This setup requires two ingredients:
+* **Collections**, which are a set of objects such as sensor hits or PID results. These can be usually separated into input collections and output collections.
+* **Algorithms**, which are a transformation of a set of collections to another set of collections.
+
+The EICrecon software is responsible for running algorithms on input collections to build output collections. The full reconstruction forms a reconstruction flowchart, which is a Directed Acyclic Graph (DAG) that with the collections produced by DD4hep and ends with the final collections requested by the user. **Only the collections requested by the users will be produced, and only the minimal set of algorithms that produce these collections will be ran.**
+
+For a quick test of our environment, we can run the full stack (simulation > reconstruction > benchmarks).
+
+```bash
+./simulate.py -t1 -n50
+./recon.rb
+```
+
+`recon.rb` is a wrapper for EICrecon, which
+* reads the configuration in the `config/` directory,
+* generates an `eicrecon` command, converting said configuration into a set of `-Pparameter=value` options,
+* runs `eicrecon` with said options.
+
+After running, we can see the reconstructed files at `out/rec.edm4hep.root`.
